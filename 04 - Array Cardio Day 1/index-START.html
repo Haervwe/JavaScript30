@@ -70,18 +70,73 @@
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    var allYears = inventors.reduce(function(a, b){
+      let age =(b.passed - b.year);
+      return a + age;
+    },0);
+    console.log(allYears);
+
     // 5. Sort the inventors by years lived
+
+
+    const sortedByAge = inventors.sort((a,b) => ((a.passed -a.year) < (b.passed -b.year))? -1 : 1);
+    console.log(sortedByAge);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    
+    
+    
+    /* 
+    const quer = document.querySelectorAll(".mw-category-group a");
+    const toFilter = Array.from(quer);
+    const order = toFilter.map(toFilter => toFilter.textContent);
+    const filterDe = order.filter( de => de.toLowerCase().indexOf("de"));
+    console.log(filterDe)>1;
+    */
 
-
+    
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    const oldPeople = people.map(function(people){
+      let names = people.split (",");
+      return names;
+    })
+
+    newPeople = oldPeople.sort(function(a,b){
+      if (a[0] > b[0]){
+        return 1;
+      }
+      if (a[0] < b[0]){
+        return -1;
+      }
+      return 0;
+          
+    });
+
+    console.log(newPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    let transportation = data.reduce(function(a,b){ 
+      
+      if (a.hasOwnProperty(`${b}`)){
+        let c = `${b}`;
+        console.log(a[c]);
+        console.log(typeof(a[c]));
+        let d = +a[c] +1;
+        Object.defineProperty(a,`${b}`,{value:`${d}`});
+      }else{
+        Object.defineProperty(a,`${b}`,{value:1,writable: true});
+      }
+      return(a);
+    },{});
+    console.log(transportation);
+    
+    
 
   </script>
 </body>
